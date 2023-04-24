@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible"
+                content="IE=edge">
+        <meta name="viewport"
+                content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet"
+                href="index.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+                rel="stylesheet">
+                <title >Shop</title>
+                <link rel="icon" href="./shopping-cart.png" type="image/x-icon">
+  
+</head>
+<style>
+   @import url('https://fonts.googleapis.com/css2?family=Cherry+Swash&display=swap');
+
+*,
+*::after,
+*::before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: "PT Sans", sans-serif;
+  color: #505260;
+  background-color: white;
+}
+
+a {
+  color: #2f889a;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+input,
+textarea {
+  font-family: "PT Sans", sans-serif;
+  font-size: 1.6rem;
+}
+
+input::-ms-clear,
+textarea::-ms-clear {
+  display: none;
+}
+
+/* --------------------------------
+Login/Signup modal window - by CodyHouse.co
+-------------------------------- */
+.cd-main-header {
+  position: relative;
+  z-index: 1;
+  height: 50px;
+  background: #ffffff;
+  font-size: 13px;
+}
+
+.cd-main-header::after {
+  /* clearfix */
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.cd-main-header__logo {
+  float: left;
+  margin: 4px 0 0 5%;
+  /* reduce logo size on mobile and make sure it is left aligned with the transform-origin property */
+  -webkit-transform-origin: 0 50%;
+  -ms-transform-origin: 0 50%;
+  transform-origin: 0 50%;
+  -webkit-transform: scale(0.8);
+  -ms-transform: scale(0.8);
+  transform: scale(0.8);
+}
+
+.cd-main-header__logo img {
+  display: block;
+}
+
+@media only screen and (min-width: 768px) {
+  .cd-main-header {
+    height: 80px;
+  }
+
+  .cd-main-header__logo {
+    margin: 20px 0 0 5%;
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+.cd-main-nav {
+  float: right;
+  margin-right: 5%;
+  width: 44px;
+  height: 100%;
+  background: url("../img/cd-icon-menu.svg") no-repeat center center;
+  cursor: pointer;
+}
+
+.cd-main-nav__list {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  -webkit-transform: translateY(-100%);
+  -ms-transform: translateY(-100%);
+  transform: translateY(-100%);
+}
+
+.cd-main-nav__list.cd-main-nav__list--is-visible {
+  -webkit-transform: translateY(50px);
+  -ms-transform: translateY(50px);
+  transform: translateY(50px);
+}
+
+.cd-main-nav__item {
+  display: block;
+  height: 50px;
+  line-height: 50px;
+  padding-left: 5%;
+  background: #292a34;
+  border-top: 1px solid #3b3d4b;
+  color: #FFF;
+}
+
+@media only screen and (min-width: 768px) {
+  .cd-main-nav {
+    /* reset style */
+    width: auto;
+    height: auto;
+    background: none;
+    cursor: auto;
+  }
+
+  .cd-main-nav__list {
+    /* reset style */
+    position: static;
+    width: auto;
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+    line-height: 80px;
+  }
+
+  .cd-main-nav__list.cd-main-nav__list--is-visible {
+    /* reset style */
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  .cd-main-nav__list li {
+    display: inline-block;
+    margin-left: 1em;
+  }
+
+  .cd-main-nav__list li:nth-last-child(2) {
+    margin-left: 2em;
+  }
+
+  .cd-main-nav__item {
+    display: inline-block;
+    height: auto;
+    line-height: normal;
+    background: transparent;
+  }
+
+  .cd-main-nav__item.cd-main-nav__item--signin,
+  .cd-main-nav__item.cd-main-nav__item--signup {
+    padding: .6em 1em;
+    border-radius: 50em;
+  }
+
+  .cd-main-nav__item.cd-main-nav__item--signin {
+    border: 1px solid rgba(255, 255, 255, 0.6);
+  }
+
+  .cd-main-nav__item.cd-main-nav__item--signup {
+    background: #2f889a;
+  }
+}
+
+/* --------------------------------
+x sigin/signup popup
+-------------------------------- */
+.cd-signin-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(52, 54, 66, 0.9);
+  z-index: 3;
+  overflow-y: auto;
+  cursor: pointer;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: opacity 0.3s, visibility 0.3s;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.cd-signin-modal.cd-signin-modal--is-visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.cd-signin-modal__container {
+  position: relative;
+  width: 90%;
+  max-width: 600px;
+  background: #FFF;
+  margin: 3em auto 4em;
+  cursor: auto;
+  border-radius: 0.25em;
+  -webkit-transform: translateY(-30px);
+  -ms-transform: translateY(-30px);
+  transform: translateY(-30px);
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
+}
+
+.cd-signin-modal--is-visible .cd-signin-modal__container {
+  -webkit-transform: translateY(0);
+  -ms-transform: translateY(0);
+  transform: translateY(0);
+}
+
+.cd-signin-modal__switcher:after {
+  /* clearfix */
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.cd-signin-modal__switcher li {
+  width: 50%;
+  float: left;
+  text-align: center;
+}
+
+.cd-signin-modal__switcher li:first-child a {
+  border-radius: .25em 0 0 0;
+}
+
+.cd-signin-modal__switcher li:last-child a {
+  border-radius: 0 .25em 0 0;
+}
+
+.cd-signin-modal__switcher a {
+  display: block;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  background: #d2d8d8;
+  color: #809191;
+}
+
+.cd-signin-modal__switcher a.cd-selected {
+  background: #FFF;
+  color: #505260;
+}
+
+@media only screen and (min-width: 600px) {
+  .cd-signin-modal__container {
+    margin: 4em auto;
+  }
+
+  .cd-signin-modal__switcher a {
+    height: 70px;
+    line-height: 70px;
+  }
+}
+
+.cd-signin-modal__form {
+  padding: 1.4em;
+}
+
+.cd-signin-modal__fieldset {
+  position: relative;
+  margin: 1.4em 0;
+}
+
+.cd-signin-modal__fieldset:first-child {
+  margin-top: 0;
+}
+
+.cd-signin-modal__fieldset:last-child {
+  margin-bottom: 0;
+}
+
+.cd-signin-modal__label {
+  font-size: 1.4rem;
+}
+
+.cd-signin-modal__label.cd-signin-modal__label--image-replace {
+  /* replace text with an icon */
+  display: inline-block;
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  bottom: auto;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  height: 20px;
+  width: 20px;
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+  color: transparent;
+  background-repeat: no-repeat;
+  background-position: 50% 0;
+}
+
+.cd-signin-modal__label.cd-signin-modal__label--username {
+  background-image: url("../img/cd-icon-username.svg");
+}
+
+.cd-signin-modal__label.cd-signin-modal__label--email {
+  background-image: url("../img/cd-icon-email.svg");
+}
+
+.cd-signin-modal__label.cd-signin-modal__label--password {
+  background-image: url("../img/cd-icon-password.svg");
+}
+
+.cd-signin-modal__input {
+  margin: 0;
+  padding: 0;
+  border-radius: 0.25em;
+}
+
+.cd-signin-modal__input.cd-signin-modal__input--full-width {
+  width: 100%;
+}
+
+.cd-signin-modal__input.cd-signin-modal__input--has-padding {
+  padding: 12px 20px 12px 50px;
+}
+
+.cd-signin-modal__input.cd-signin-modal__input--has-border {
+  border: 1px solid #d2d8d8;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.cd-signin-modal__input.cd-signin-modal__input--has-border:focus {
+  border-color: #343642;
+  -webkit-box-shadow: 0 0 5px rgba(52, 54, 66, 0.1);
+  box-shadow: 0 0 5px rgba(52, 54, 66, 0.1);
+  outline: none;
+}
+
+.cd-signin-modal__input.cd-signin-modal__input--has-error {
+  border: 1px solid #d76666;
+}
+
+.cd-signin-modal__input[type=submit] {
+  padding: 16px 0;
+  cursor: pointer;
+  background: #2f889a;
+  color: #FFF;
+  font-weight: bold;
+  border: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.cd-signin-modal__input[type=submit]:hover,
+.cd-signin-modal__input[type=submit]:focus {
+  background: #3599ae;
+  outline: none;
+}
+
+.cd-signin-modal__hide-password {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 6px 15px;
+  border-left: 1px solid #d2d8d8;
+  top: 50%;
+  bottom: auto;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  font-size: 1.4rem;
+  color: #343642;
+}
+
+.cd-signin-modal__error {
+  display: inline-block;
+  position: absolute;
+  left: -5px;
+  bottom: -35px;
+  background: rgba(215, 102, 102, 0.9);
+  padding: .8em;
+  z-index: 2;
+  color: #FFF;
+  font-size: 1.3rem;
+  border-radius: 0.25em;
+  /* prevent click and touch events */
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: opacity 0.2s 0s, visibility 0s 0.2s;
+  transition: opacity 0.2s 0s, visibility 0s 0.2s;
+}
+
+.cd-signin-modal__error::after {
+  /* triangle */
+  content: '';
+  position: absolute;
+  left: 22px;
+  bottom: 100%;
+  height: 0;
+  width: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid rgba(215, 102, 102, 0.9);
+}
+
+.cd-signin-modal__error.cd-signin-modal__error--is-visible {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transition: opacity 0.2s 0s, visibility 0s 0s;
+  transition: opacity 0.2s 0s, visibility 0s 0s;
+}
+
+@media only screen and (min-width: 600px) {
+  .cd-signin-modal__form {
+    padding: 2em;
+  }
+
+  .cd-signin-modal__fieldset {
+    margin: 2em 0;
+  }
+
+  .cd-signin-modal__fieldset:first-child {
+    margin-top: 0;
+  }
+
+  .cd-signin-modal__fieldset:last-child {
+    margin-bottom: 0;
+  }
+
+  .cd-signin-modal__input.cd-signin-modal__input--has-padding {
+    padding: 16px 20px 16px 50px;
+  }
+
+  .cd-signin-modal__input[type=submit] {
+    padding: 16px 0;
+  }
+}
+
+.cd-signin-modal__message {
+  padding: 1.4em 1.4em 0;
+  font-size: 1.4rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+@media only screen and (min-width: 600px) {
+  .cd-signin-modal__message {
+    padding: 2em 2em 0;
+  }
+}
+
+.cd-signin-modal__bottom-message {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: -30px;
+  text-align: center;
+  font-size: 1.4rem;
+}
+
+.cd-signin-modal__bottom-message a {
+  color: #FFF;
+  text-decoration: underline;
+}
+
+.cd-signin-modal__close {
+  /* form X button on top right */
+  display: block;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  right: 0;
+  top: -40px;
+  background: url("../img/cd-icon-close.svg") no-repeat center center;
+  color: transparent;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@media only screen and (min-width: 1170px) {
+  .cd-signin-modal__close {
+    display: none;
+  }
+}
+
+.cd-signin-modal__block {
+  display: none;
+}
+
+.cd-signin-modal__block.cd-signin-modal__block--is-selected {
+  display: block;
+}
+
+/* DROPDOWN */
+.dropbtn {
+  background-color: rgb(249, 249, 249);
+  color: rgb(11, 10, 10);
+  padding: 5px;
+  font-size: 12px;
+  border: none;
+  border-bottom-style: inset;
+  font-size: 20px;
+  padding: 18px;
+  width: 99%;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  width: 10%;
+  width: 79%;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 300px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: rgb(0, 0, 0);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: white
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #ffffff;
+}
+
+.ddrop {
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+  width: 30%;
+}
+
+.zemodiv {
+  display: flex;
+}
+
+.shopheader {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 65%;
+}
+
+.everyday {
+  background-color:
+    #004197;
+  color: white;
+  padding: 15px;
+}
+
+.everyday:hover {
+  background-color:
+    #004197;
+  cursor: pointer;
+}
+
+.imunity {
+  background-color:
+    #F3F3F3;
+  padding: 15px;
+  color: #3f4042;
+}
+
+.imunity:hover {
+  background-color:
+    #004197;
+  color: white;
+  cursor: pointer;
+}
+
+.cleaning {
+  background-color:
+    #F3F3F3;
+  padding: 15px;
+  color: #3f4042;
+}
+
+.cleaning:hover {
+  background-color:
+    #004197;
+  color: white;
+  cursor: pointer;
+}
+
+#vitamin {
+  background-color:
+    #F3F3F3;
+  padding: 15px;
+}
+
+#vitamin:hover {
+  background-color:
+    #004197;
+  color: white;
+  cursor: pointer;
+}
+
+.prsr {
+  display: flex;
+  justify-content: end;
+  justify-content: space-between;
+  width: 72%;
+}
+
+.sortdiv {
+  display: flex;
+  justify-content: end;
+  width: 92%;
+}
+
+.sspp {
+  width: 20%;
+  background-color: #F3F3F3;
+  padding: 30px;
+}
+
+.vvcc {
+  width: 20%;
+  background-color: #F3F3F3;
+  padding: 30px;
+}
+
+.hhgg {
+  width: 20%;
+  background-color: #F3F3F3;
+  padding: 30px;
+}
+
+.aann {
+  width: 20%;
+  background-color: #F3F3F3;
+  padding: 30px;
+}
+
+.mmss {
+  width: 20%;
+  background-color: #F3F3F3;
+  padding: 30px;
+}
+
+.ddee {
+  width: 20%;
+  background-color: #F3F3F3;
+  padding: 30px;
+}
+
+.onelinephoto {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 3%;
+}
+
+.twolinephoto {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10%;
+}
+
+.cost {
+  display: flex;
+  justify-content: space-around;
+}
+
+.cost2 {
+  display: flex;
+  justify-content: space-around;
+}
+
+.body1 {
+  font-weight: 600;
+  font-family: inherit;
+  margin-top: 1%;
+}
+
+.bodycost {
+  font-weight: 300;
+  margin-top: 2%;
+  font-size: 14px;
+  text-align: center;
+}
+
+.vitamin1 {
+  font-weight: 600;
+  font-family: inherit;
+  margin-top: 1%;
+}
+
+.vitamincost {
+  font-weight: 300;
+  margin-top: 2%;
+  font-size: 14px;
+  text-align: center;
+}
+
+.hand1 {
+  font-weight: 600;
+  font-family: inherit;
+  margin-top: 1%;
+}
+
+.handcost {
+  font-weight: 300;
+  margin-top: 2%;
+  font-size: 14px;
+  text-align: center;
+}
+
+.santizier1 {
+  font-weight: 600;
+  font-family: inherit;
+  margin-top: 1%;
+}
+
+.sanitiziercost {
+  font-weight: 300;
+  margin-top: 2%;
+  font-size: 14px;
+  text-align: center;
+}
+
+.face1 {
+  font-weight: 600;
+  font-family: inherit;
+  margin-top: 1%;
+}
+
+.facecost {
+  font-weight: 300;
+  margin-top: 2%;
+  font-size: 14px;
+  text-align: center;
+}
+
+.deodorant1 {
+  font-weight: 600;
+  font-family: inherit;
+  margin-top: 1%;
+}
+
+.deodorantcost {
+  font-weight: 300;
+  margin-top: 2%;
+  font-size: 14px;
+  text-align: center;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+}
+
+.pagination a.active {
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+}
+
+.pagination a:hover:not(.active) {
+  background-color: #ddd;
+}
+
+.fivediv {
+  margin-top: 5%;
+}
+
+.saleparcent {
+  position: absolute;
+  left: 16.6%;
+  border-style: groove;
+  background-color: #E2342D;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  font-family: auto;
+  border-style: none;
+  width: 10%;
+}
+
+.saleparcents {
+  position: absolute;
+  border-style: groove;
+  background-color: #E2342D;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  font-family: auto;
+  border-style: none;
+  width: 10%;
+  margin-top: -20%;
+  margin-left: 76.5%;
+}
+
+.sspp:hover {
+  width: 19%;
+  cursor: pointer;
+}
+
+.sspp {
+  transition: 0.4s;
+}
+
+.vvcc:hover {
+  width: 18%;
+  cursor: pointer;
+}
+
+.vvcc {
+  transition: 0.4s;
+}
+
+.hhgg:hover {
+  width: 18%;
+  cursor: pointer;
+}
+
+.hhgg {
+  transition: 0.4s;
+}
+
+.aann:hover {
+  width: 18%;
+  cursor: pointer;
+}
+
+.aann {
+  transition: 0.4s;
+}
+
+.mmss:hover {
+  width: 18%;
+  cursor: pointer;
+}
+
+.mmss {
+  transition: 0.4s;
+}
+
+.ddee:hover {
+  width: 18%;
+  cursor: pointer;
+}
+
+.ddee {
+  transition: 0.4s;
+}
+  </style>
+  
+
+<body>
+  <div class="cd-main-header" style="margin-top: -2%;
+  ">
+  	<nav class="cd-main-nav js-main-nav" style="width:23% ">
+  		<ul class="cd-main-nav__list js-signin-modal-trigger">
+  			<!-- inser more links here -->
+  			<a href="index.html" style="text-decoration: none;"><span id="help">Return</span></a>
+  			<a href="index.html" style="text-decoration: none; margin-left: 3%;"><span id="help">Help</span></a>
+  			<li><a class="return" href="#0" data-signin="login">Register/Sign in</a></li>
+  	</nav>
+  </div>
+  <div class="divider"></div>
+  <div class=" header2" style="margin-bottom: 5%;">
+  	<div class="shd">
+  		<img class="search" src="search.png" alt="">
+  		<a href="shop.html" href="shop.css">
+  			<div class="shop" style="color: rgb(71, 66, 66);"> SHOP </div>
+  		</a>
+  	</div>
+  	<div class="essential">ESSENTIALS </div>
+  	<div class="bigfont">
+  		<div class="MAcc"><span style="font-family: 'Cherry Swash', cursive; font-size: 50px;">M</span>ACC </div>
+  		<div class="ess"><span style="font-family: 'Cherry Swash', cursive; font-size: 50px;">E</span>SSENTIALS </div>
+  	</div>
+  	<div class="seller">BEST SELLERS </div>
+  	<div class="about"> ABOUT US </div>
+  	<div class="icons">
+  		<img class="profile" src="./profile.png" alt="">
+  		<img class="notification" src="./notification.png" alt="">
+  		<img class="purse" src="./purse.png" alt="">
+  	</div>
+  </div>
+  <div class="cd-signin-modal js-signin-modal"> <!-- this is the entire modal form, including the background -->
+  	<div class="cd-signin-modal__container"> <!-- this is the container wrapper -->
+  		<ul class="cd-signin-modal__switcher js-signin-modal-switcher js-signin-modal-trigger">
+  			<li><a href="#0" data-signin="login" data-type="login">Sign in</a></li>
+  			<li><a href="#0" data-signin="signup" data-type="signup">New account</a></li>
+  		</ul>
+  		<div class="cd-signin-modal__block js-signin-modal-block" data-type="login"> <!-- log in form -->
+  			<form class="cd-signin-modal__form">
+  				<p class="cd-signin-modal__fieldset">
+  					<label class="cd-signin-modal__label cd-signin-modal__label--email cd-signin-modal__label--image-replace" for="signin-email">E-mail</label>
+  					<input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signin-email" type="email" placeholder="E-mail">
+  					<span class="cd-signin-modal__error">Error message here!</span>
+  				</p>
+  				<p class="cd-signin-modal__fieldset">
+  					<label class="cd-signin-modal__label cd-signin-modal__label--password cd-signin-modal__label--image-replace" for="signin-password">Password</label>
+  					<input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signin-password" type="text" placeholder="Password">
+  					<a href="#0" class="cd-signin-modal__hide-password js-hide-password">Hide</a>
+  					<span class="cd-signin-modal__error">Error message here!</span>
+  				</p>
+  				<p class="cd-signin-modal__fieldset">
+  					<input type="checkbox" id="remember-me" checked class="cd-signin-modal__input ">
+  					<label for="remember-me">Remember me</label>
+  				</p>
+  				<p class="cd-signin-modal__fieldset">
+  					<input class="cd-signin-modal__input cd-signin-modal__input--full-width" type="submit" value="Login">
+  				</p>
+  			</form>
+  			<p class="cd-signin-modal__bottom-message js-signin-modal-trigger"><a href="#0" data-signin="reset">Forgot your password?</a></p>
+  		</div> <!-- cd-signin-modal__block -->
+  		<div class="cd-signin-modal__block js-signin-modal-block" data-type="signup"> <!-- sign up form -->
+  			<form class="cd-signin-modal__form">
+  				<p class="cd-signin-modal__fieldset">
+  					<label class="cd-signin-modal__label cd-signin-modal__label--username cd-signin-modal__label--image-replace" for="signup-username">Username</label>
+  					<input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signup-username" type="text" placeholder="Username">
+  					<span class="cd-signin-modal__error">Error message here!</span>
+  				</p>
+  				<p class="cd-signin-modal__fieldset">
+  					<label class="cd-signin-modal__label cd-signin-modal__label--email cd-signin-modal__label--image-replace" for="signup-email">E-mail</label>
+  					<input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signup-email" type="email" placeholder="E-mail">
+  					<span class="cd-signin-modal__error">Error message here!</span>
+  				</p>
+  				<p class="cd-signin-modal__fieldset">
+  					<label class="cd-signin-modal__label cd-signin-modal__label--password cd-signin-modal__label--image-replace" for="signup-password">Password</label>
+  					<input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signup-password" type="text" placeholder="Password">
+  					<a href="#0" class="cd-signin-modal__hide-password js-hide-password">Hide</a>
+  					<span class="cd-signin-modal__error">Error message here!</span>
+  				</p>
+  				<p class="cd-signin-modal__fieldset">
+  					<input type="checkbox" id="accept-terms" class="cd-signin-modal__input ">
+  					<label for="accept-terms">I agree to the <a href="#0">Terms</a></label>
+  				</p>
+  				<p class="cd-signin-modal__fieldset">
+  					<input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding" type="submit" value="Create account">
+  				</p>
+  			</form>
+  		</div> <!-- cd-signin-modal__block -->
+  		<div class="cd-signin-modal__block js-signin-modal-block" data-type="reset"> <!-- reset password form -->
+  			<p class="cd-signin-modal__message">Lost your password? Please enter your email address. You will receive a link to create a new password.</p>
+  			<form class="cd-signin-modal__form">
+  				<p class="cd-signin-modal__fieldset">
+  					<label class="cd-signin-modal__label cd-signin-modal__label--email cd-signin-modal__label--image-replace" for="reset-email">E-mail</label>
+  					<input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="reset-email" type="email" placeholder="E-mail">
+  					<span class="cd-signin-modal__error">Error message here!</span>
+  				</p>
+  				<p class="cd-signin-modal__fieldset">
+  					<input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding" type="submit" value="Reset password">
+  				</p>
+  			</form>
+  			<p class="cd-signin-modal__bottom-message js-signin-modal-trigger"><a href="#0" data-signin="login">Back to log-in</a></p>
+  		</div>
+  		<a href="#0" class="cd-signin-modal__close js-close">Close</a>
+  	</div>
+  </div>
+  <div>
+  	<img src="./cover.png" alt="" style="width: 100%;     margin-bottom: 4%;
+">
+  </div>
+  <div class="zemodiv">
+  	<div class="ddrop">
+  		<div class="dropdown">
+  			<button class="dropbtn" style="display: flex;justify-content: space-between;">
+  				<div>COMPANY</div>
+  				<div>﹀</div>
+  			</button>
+  			<div class="dropdown-content">
+  				<a href="#">Link 1</a>
+  				<a href="#">Link 2</a>
+  				<a href="#">Link 3</a>
+  				<i class="fa fa-caret-down"></i>
+  			</div>
+  		</div>
+  		<div class="dropdown">
+  			<button class="dropbtn" style="display: flex;justify-content: space-between;">
+  				<div style="padding-right: 36px;">PRICE</div>
+  				<div>﹀</div>
+  			</button>
+  			<div class="dropdown-content">
+  				<a href="#">Link 1</a>
+  				<a href="#">Link 2</a>
+  				<a href="#">Link 3</a>
+  				<i class="fa fa-caret-down"></i>
+  			</div>
+  		</div>
+  		<div class="dropdown">
+  			<button class="dropbtn" style="display: flex;justify-content: space-between;">
+  				<div>CATEGORIES</div>
+  				<div>﹀</div>
+  			</button>
+  			<div class="dropdown-content">
+  				<a href="#">Link 1</a>
+  				<a href="#">Link 2</a>
+  				<a href="#">Link 3</a>
+  				<i class="fa fa-caret-down"></i>
+  			</div>
+  		</div>
+  	</div>
+  	<div class="shopheader">
+  		<div class="everyday">Everyday Essentials</div>
+  		<a href="productsdetails.html">
+  			<div class="cleaning">Cleaning Essentials</div>
+  		</a>
+  		<a href="imunity.html">
+  			<div class="imunity">Immunity & Health</div>
+  		</a>
+  		<div class="popup" onclick="myFunction()" id="vitamin">Vitamin Supplemer <span class="popuptext" id="myPopup">not implemented yet</span>
+  		</div>
+  	</div>
+  </div>
+  <div class="sortdiv">
+  	<div class="prsr">
+  		<div class="prdct">40 products</div>
+  		<div><select name="chapter" id="chapter" style="padding-right: 50px;">
+  				<option value="" selected="selected">Sort</option>
+  			</select>
+  		</div>
+  	</div>
+  </div>
+  <div class="bothline">
+  	<div class="saleparcent">free 20%</div>
+  	<div class="onelinephoto">
+  		<div class="sspp"><img src="spray.png" alt=""></div>
+  		<div class="vvcc"><img src="vitamin c.png" alt=""></div>
+  		<div class="hhgg"><img src="hand gloves.png" alt=""></div>
+  	</div>
+  	<div class="cost">
+  		<div class="body1">Body Spray <div class="bodycost"><span style="text-decoration:line-through;">€500</span> €400</div>
+  		</div>
+  		<div class="vitamin1">Vitamin C <div class="vitamincost">€280</div>
+  		</div>
+  		<div class="hand1">Hand Gloves <div class="handcost">€150</div>
+  		</div>
+  	</div>
+  	<div class="twolinephoto">
+  		<div class="aann"><img src="santizier.png" alt=""></div>
+  		<div class="mmss"><img src="mask.png" alt=""></div>
+  		<div class="ddee"><img src="deodorant (1).png" alt=""></div>
+  	</div>
+  	<div class="cost2">
+  		<div class="santizier1">Sanitrizer <div class="sanitiziercost">€87</div>
+  		</div>
+  		<div class="face1">Face Mask <div class="facecost">€34</div>
+  		</div>
+  		<div class="saleparcents">free 20%</div>
+  		<div class="deodorant1">Deodorant <div class="deodorantcost"><span style="text-decoration: line-through;">€500</span> €244</div>
+  		</div>
+  	</div>
+  </div>
+  <div class="pagination" style="  display: flex;
+                                            justify-content: center; margin-top: 3%;">
+  	<a href="#">&laquo;</a>
+  	<a href="#">1</a>
+  	<a class="active" href="#">2</a>
+  	<a href="#">3</a>
+  	<a href="#" class="nxt">&raquo;</a>
+  </div>
+  <div class="fivediv">
+  	<div class="smaldiv1">
+  		<div class="logo">
+  			<div class="MAccc"><span style="font-family: 'Cherry Swash', cursive; font-size: 50px;">M</span>ACC </div>
+  			<div class="esss"><span style="font-family: 'Cherry Swash', cursive; font-size: 50px;">E</span>SSENTIALS </div>
+  		</div>
+  		<div class="oneline" style="margin-top:0.6%;">
+  			<a href="index.html">
+  				<div class="homme" style="color: #59595b">Home</div>
+  			</a>
+  			<div class="popup" onclick="myFunc()">
+  				<div class="colect">Collection</div>
+  				<span class="popuptext" id="myPo">not implemented yet</span>
+  			</div>
+  			<a href="shop.html">
+  				<div class="producct" style="color: #59595b;">Products</div>
+  			</a>
+  		</div>
+  	</div>
+  	<div class="smaldiv2">
+  		<div class="twoline">
+  			<div class="popup" onclick="myFunct()">
+  				<div class="aboutt">About</div>
+  				<span class="popuptext" id="myP">not implemented yet</span>
+  			</div>
+  			<a href="sign in.html">
+  				<div class="Contacct" style="color: #59595b;">Contact</div>
+  			</a>
+  			<div class="popup" onclick="myFunction()">
+  				<div class="popup" onclick="myFunctionq()">
+  					<div class="faqss">FAQ</div>
+  					<span class="popuptext" id="pup">not implemented yet</span>
+  				</div>
+  				<span class="popuptext" id="myPopup">not implemented yet</span>
+  			</div>
+  		</div>
+  		<div class="threline">
+  			<div class="lasttext">Be the first to know about our biggest and best sales. We'll never send more than one email a month.</div>
+  			<div class="inpt">
+  				<div class="field-group">
+  					<input type="text" id="name" name="lname" class="input-field" placeholder="ENTER YOUR EMAIL" autocomplete="off ">
+  					<label for="name" class="input-label"></label>
+  				</div>
+  				<div class="emailimg"><img class="emailimg" src="./email.png" alt=""></div>
+  			</div>
+  			<div class="iconebi">
+  				<a href="https://twitter.com/?lang=en">
+  					<div><img src="./twitter.png" alt=""></div>
+  				</a>
+  				<a href="https://www.linkedin.com/">
+  					<div><img src="./linkedin.png" alt=""></div>
+  				</a>
+  				<a href="https://www.facebook.com/">
+  					<div><img src="./facebook.png" alt=""></div>
+  				</a>
+  				<a href="https://www.instagram.com/"> <img src="./instagram.png" alt="">
+  			</div> </a>
+  		</div>
+  	</div>
+  </div>
+  </div>
+  <div class="lastdiv">
+  	<div>All rights are reserved</div>
+  </div>
+</body>
+<script>
+(function() {
+  //Login/Signup modal window - by CodyHouse.co
+  function ModalSignin(element) {
+    this.element = element;
+    this.blocks = this.element.getElementsByClassName('js-signin-modal-block');
+    this.switchers = this.element.getElementsByClassName('js-signin-modal-switcher')[0].getElementsByTagName('a');
+    this.triggers = document.getElementsByClassName('js-signin-modal-trigger');
+    this.hidePassword = this.element.getElementsByClassName('js-hide-password');
+    this.init();
+  };
+  ModalSignin.prototype.init = function() {
+    var self = this;
+    //open modal/switch form
+    for (var i = 0; i < this.triggers.length; i++) {
+      (function(i) {
+        self.triggers[i].addEventListener('click', function(event) {
+          if (event.target.hasAttribute('data-signin')) {
+            event.preventDefault();
+            self.showSigninForm(event.target.getAttribute('data-signin'));
+          }
+        });
+      })(i);
+    }
+    //close modal
+    this.element.addEventListener('click', function(event) {
+      if (hasClass(event.target, 'js-signin-modal') || hasClass(event.target, 'js-close')) {
+        event.preventDefault();
+        removeClass(self.element, 'cd-signin-modal--is-visible');
+      }
+    });
+   
+    document.addEventListener('keydown', function(event) {
+      (event.which == '27') && removeClass(self.element, 'cd-signin-modal--is-visible');
+    });
+    //hide/show password
+    for (var i = 0; i < this.hidePassword.length; i++) {
+      (function(i) {
+        self.hidePassword[i].addEventListener('click', function(event) {
+          self.togglePassword(self.hidePassword[i]);
+        });
+      })(i);
+    }
+    //IMPORTANT - REMOVE THIS - it's just to show/hide error messages in the demo
+    this.blocks[0].getElementsByTagName('form')[0].addEventListener('submit', function(event) {
+      event.preventDefault();
+      self.toggleError(document.getElementById('signin-email'), true);
+    });
+    this.blocks[1].getElementsByTagName('form')[0].addEventListener('submit', function(event) {
+      event.preventDefault();
+      self.toggleError(document.getElementById('signup-username'), true);
+    });
+  };
+  ModalSignin.prototype.togglePassword = function(target) {
+    var password = target.previousElementSibling;
+    ('password' == password.getAttribute('type')) ? password.setAttribute('type', 'text'): password.setAttribute('type', 'password');
+    target.textContent = ('Hide' == target.textContent) ? 'Show' : 'Hide';
+    putCursorAtEnd(password);
+  }
+  ModalSignin.prototype.showSigninForm = function(type) {
+    // show modal if not visible
+    !hasClass(this.element, 'cd-signin-modal--is-visible') && addClass(this.element, 'cd-signin-modal--is-visible');
+    // show selected form
+    for (var i = 0; i < this.blocks.length; i++) {
+      this.blocks[i].getAttribute('data-type') == type ? addClass(this.blocks[i], 'cd-signin-modal__block--is-selected') : removeClass(this.blocks[i], 'cd-signin-modal__block--is-selected');
+    }
+    //update switcher appearance
+    var switcherType = (type == 'signup') ? 'signup' : 'login';
+    for (var i = 0; i < this.switchers.length; i++) {
+      this.switchers[i].getAttribute('data-type') == switcherType ? addClass(this.switchers[i], 'cd-selected') : removeClass(this.switchers[i], 'cd-selected');
+    }
+  };
+  ModalSignin.prototype.toggleError = function(input, bool) {
+    // used to show error messages in the form
+    toggleClass(input, 'cd-signin-modal__input--has-error', bool);
+    toggleClass(input.nextElementSibling, 'cd-signin-modal__error--is-visible', bool);
+  }
+  var signinModal = document.getElementsByClassName("js-signin-modal")[0];
+  if (signinModal) {
+    new ModalSignin(signinModal);
+  }
+  // 
+  var mainNav = document.getElementsByClassName('js-main-nav')[0];
+  if (mainNav) {
+    mainNav.addEventListener('click', function(event) {
+      if (hasClass(event.target, 'js-main-nav')) {
+        var navList = mainNav.getElementsByTagName('ul')[0];
+        toggleClass(navList, 'cd-main-nav__list--is-visible', !hasClass(navList, 'cd-main-nav__list--is-visible'));
+      }
+    });
+  }
+//
+  function hasClass(el, className) {
+    if (el.classList) return el.classList.contains(className);
+    else return !!el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'));
+  }
+
+  function addClass(el, className) {
+    var classList = className.split(' ');
+    if (el.classList) el.classList.add(classList[0]);
+    else if (!hasClass(el, classList[0])) el.className += " " + classList[0];
+    if (classList.length > 1) addClass(el, classList.slice(1).join(' '));
+  }
+
+  function removeClass(el, className) {
+    var classList = className.split(' ');
+    if (el.classList) el.classList.remove(classList[0]);
+    else if (hasClass(el, classList[0])) {
+      var reg = new RegExp('(\\s|^)' + classList[0] + '(\\s|$)');
+      el.className = el.className.replace(reg, ' ');
+    }
+    if (classList.length > 1) removeClass(el, classList.slice(1).join(' '));
+  }
+
+  function toggleClass(el, className, bool) {
+    if (bool) addClass(el, className);
+    else removeClass(el, className);
+  }
+
+  function putCursorAtEnd(el) {
+    if (el.setSelectionRange) {
+      var len = el.value.length * 2;
+      el.focus();
+      el.setSelectionRange(len, len);
+    } else {
+      el.value = el.value;
+    }
+  };
+})();
+//
+function myFunction() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
+        
+          //sort drop
+          topicSel.onchange = function() {
+chapterSel.length = 1;
+    var z = subjectObject[subjectSel.value][this.value];
+    for (var i = 0; i < z.length; i++) {
+      chapterSel.options[chapterSel.options.length] = new Option(z[i], z[i]);
+    }
+  }
+
+//
+function myFunction() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
+function myFunct() {
+  var popup = document.getElementById("myP");
+  popup.classList.toggle("show");
+}
+function myFunc() {
+  var popup = document.getElementById("myPo");
+  popup.classList.toggle("show");
+}
+function myFunction() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
+function myFunctionq() {
+  var popup = document.getElementById("pup");
+  popup.classList.toggle("show");
+}
+
+</script>
+
+</html>
