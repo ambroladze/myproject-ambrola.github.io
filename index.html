@@ -92,10 +92,7 @@ Login/Signup modal window - by CodyHouse.co
   display: block;
 }
 
-@media only screen and (min-width: 768px) {
-  .cd-main-header {
-    height: 80px;
-  }
+
 
   .cd-main-header__logo {
     margin: 20px 0 0 5%;
@@ -103,7 +100,7 @@ Login/Signup modal window - by CodyHouse.co
     -ms-transform: scale(1);
     transform: scale(1);
   }
-}
+
 
 .cd-main-nav {
   float: right;
@@ -542,13 +539,48 @@ button:hover {
   display: flex;
   justify-content: end;
 }
+#scroll-top-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 23px;
+  
+  display: none;
+}
+#mySidenav a {
+  position: absolute;
+  left: -80px;
+  transition: 0.3s;
+  padding: 10px;
+  width: 100px;
+  text-decoration: none;
+  font-size: 20px;
+  color: white;
+  border-radius: 0 5px 5px 0;
+  position: fixed;
+}
+
+#mySidenav a:hover {
+  left: 0;
+}
+#contact {
+  top: 70px;
+  background-color: #555
+}
   </style>
   
+<div id="mySidenav" class="sidenav">
 
-<body>
-  <div class="darkmod"> <button id="darkModeBtn">Dark Mode</button></div>
+  <a href="#" id="contact">  <div> <button id="darkModeBtn">Dark Mode</button></div></a>
+</div>
+
+<body class="onebody">
+
+	<button id="scroll-top-btn" style="background-color: white;"><img src="up-arrow (3).png" alt=""></button>
+
   <div id="hed" class="cd-main-header" style="display: flex;justify-content: end;">
-  	<nav class="cd-main-nav js-main-nav" style="width:23% ">
+  	<nav class="cd-main-nav js-main-nav" style="width:20%; display: flex;
+	  flex-direction: column;
+	  justify-content: center; ">
   		<ul class="cd-main-nav__list js-signin-modal-trigger">
   			<!-- inser more links here -->
   			<a href="index.html" style="text-decoration: none;"><span id="return">Return</span></a>
@@ -557,7 +589,7 @@ button:hover {
   	</nav>
   </div>
   <div class="divider"></div>
-  <div class=" header2">
+  <div class=" header2" id="Myheader">
   	<div class="shd">
   		<img class="search" src="search.png" alt="">
   		<a href="shop.html" href="shop.css">
@@ -960,7 +992,37 @@ function myFunc() {
 	var popup = document.getElementById("myPo");
 	popup.classList.toggle("show");
 }
-//localstorage
+
+//
+window.onscroll = function() {myFunction()};
+
+var header = document.getElementById("Myheader");
+var sticky = header.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+  } else {
+    header.classList.remove("sticky");
+  }
+}
+//
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  var button = document.getElementById("scroll-top-btn");
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    button.style.display = "block";
+  } else {
+    button.style.display = "none";
+  }
+}
+
+document.getElementById("scroll-top-btn").addEventListener("click", function(){
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+});
+//darkmode
 const darkModeBtn = document.getElementById('darkModeBtn');
 const body = document.querySelector('body');
 const storageKey = 'darkMode';
@@ -1000,6 +1062,7 @@ darkModeBtn.addEventListener('click', function() {
 		document.querySelector(".homme").style.color = "black"
 		document.querySelector(".producct").style.color = "black"
 		document.querySelector(".contacct").style.color = "black"
+
 		bcolor = "white"
 		return
 	}

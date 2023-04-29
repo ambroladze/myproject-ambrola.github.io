@@ -62,6 +62,7 @@
         font-variant-caps: unicase;
         width: 97%;
         padding: 7px;
+
         
         }
         
@@ -357,6 +358,7 @@
         }
         .onereklama:hover{
                 transform: scale(1.1); 
+                cursor: pointer;
         }
         .spray1{
         width: 90%;
@@ -1324,6 +1326,7 @@
 }
 .tworeklama:hover{
         transform: scale(1.1); 
+        cursor: pointer;
 }
 .backimg{
         position: absolute;
@@ -1337,3 +1340,33 @@
      top: 36%;
      position: absolute;
 }
+.onebody{
+
+
+        position: relative;
+        animation-name: example;
+        animation-duration: 2s;
+     
+        overflow-x: hidden;
+        display: block;
+  
+
+      }
+      
+      @keyframes example {
+    
+        40%  {background-color:rgb(142, 135, 135); left:200%; top:0px;}
+        75%  {background-color:rgb(255, 255, 255); left:0px; top:0px;}
+      
+      }
+    
+      .sticky {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 2;
+      }
+      
+      .sticky + .content {
+        padding-top: 102px;
+      }
