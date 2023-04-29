@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Redirecting to Next Page</title>
+</head>
+<style>
+    #myProgress {
+  width: 100%;
+  background-color: #171616;
+  display: flex;
+    justify-content: center;
+    align-items: center;
+  
+
+
+  height: 50%;
+}
+
+#myBar {
+  width: 10%;
+  height: 30px;
+  background-color: #010101;
+  text-align: center;
+  line-height: 30px;
+  color: rgb(0, 0, 0);
+}
+html{
+    background-color: black;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box !important; }
+
+html, body {
+  height: 100%; }
+
+body {
+  display: table;
+  width: 100%;
+  height: 100%;
+  background-color: #171717;
+  color: #000;
+  line-height: 1.6;
+  position: relative;
+  font-family: sans-serif;
+  overflow: hidden; }
+
+.lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  margin: auto;
+  width: 90vw; }
+
+  .align{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+.line {
+  position: absolute;
+  width: 1px;
+  height: 100%;
+  top: 0;
+  left: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden; }
+  .line::after {
+    content: '';
+    display: block;
+    position: absolute;
+    height: 15vh;
+    width: 100%;
+    top: -50%;
+    left: 0;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 75%, #ffffff 100%);
+    animation: drop 7s 0s infinite;
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0.4, 0.26, 0, 0.97); }
+  .line:nth-child(1) {
+    margin-left: -25%; }
+    .line:nth-child(1)::after {
+      animation-delay: 2s; }
+  .line:nth-child(3) {
+    margin-left: 25%; }
+    .line:nth-child(3)::after {
+      animation-delay: 2.5s; }
+
+@keyframes drop {
+  0% {
+    top: -50%; }
+  100% {
+    top: 110%; } }
+
+</style>
+<body>
+    <div class="lines">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+      <div class="align">
+    <div id="myProgress">
+       <img src="Gear-0.2s-195px.gif" alt="" style="background-color: #171717">
+      <br>
+    </div>
+
+
+  <script>
+    
+    // Create a function to move the progress bar
+    function moveProgressBar() {
+      var elem = document.getElementById("myBar");
+      var width = 1;
+      var id = setInterval(frame, 100);
+      function frame() {
+        if (width >= 100) {
+          clearInterval(id);
+        } else {
+          width++;
+          elem.style.width = width + "%";
+        }
+      }
+    }
+
+    // Call the moveProgressBar function when the page loads
+    window.onload = moveProgressBar;
+
+    // Redirect to the next page after 10 seconds
+    setTimeout(function() {
+      window.location.href = "file:///C:/Users/User/Desktop/project/index.html";
+    }, 3000);
+  </script>
+
+</body>
+</html>

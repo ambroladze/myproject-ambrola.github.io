@@ -532,7 +532,7 @@ button {
 }
 
 button:hover {
-  background-color: #868181;
+background-color: #555;
 }
 
 .darkmod {
@@ -542,8 +542,11 @@ button:hover {
 #scroll-top-btn {
   position: fixed;
   bottom: 20px;
-  right: 23px;
-  
+  right: 39px;
+  font-size: 40px;
+  background-color: none;
+  mix-blend-mode: multiply;
+
   display: none;
 }
 #mySidenav a {
@@ -554,7 +557,7 @@ button:hover {
   width: 100px;
   text-decoration: none;
   font-size: 20px;
-  color: white;
+
   border-radius: 0 5px 5px 0;
   position: fixed;
 }
@@ -566,6 +569,7 @@ button:hover {
   top: 70px;
   background-color: #555
 }
+  
   </style>
   
 <div id="mySidenav" class="sidenav">
@@ -575,7 +579,7 @@ button:hover {
 
 <body class="onebody">
 
-	<button id="scroll-top-btn" style="background-color: white;"><img src="up-arrow (3).png" alt=""></button>
+	<button id="scroll-top-btn" style="background-color: white;">🔝</button>
 
   <div id="hed" class="cd-main-header" style="display: flex;justify-content: end;">
   	<nav class="cd-main-nav js-main-nav" style="width:20%; display: flex;
@@ -687,7 +691,7 @@ button:hover {
   		<div class="textblue"> PROVIDING SERVICES <div class="atdoor"> AT YOUR DOOR </div>
   		</div>
   		<div class="grey" style="width: 74%;">
-  			<span style="color:grey; font-size: 16px; font-weight: 700;">MACC Essentials</span> has an important role in making supplies and services available to customers and their patients during this critical time. This includes services from various domains. Our aim is to aid you. As much we can.
+  			<span style="color:grey; font-size: 29px; font-weight: 700;">MACC Essentials</span> has an important role in making supplies and services available to customers and their patients during this critical time. This includes services from various domains. Our aim is to aid you. As much we can.
   		</div>
   		<a href="./learnmore.html"><button type="button" class="btn btn-danger" id="learn">LEARN MORE</button></a>
   	</div>
@@ -834,10 +838,11 @@ button:hover {
   				<div class="field-group">
   					<input type="text" id="name" name="lname" class="input-field" placeholder="ENTER YOUR EMAIL" autocomplete="off ">
   					<label for="name" class="input-label"></label>
+      <a href="https://mail.google.com/mail/u/0/#inbox"> <div class="emalimg"><img src="email.png" alt="" style=" width:100%"></div></a>     
   				</div>
-  				<div class="emailimg"><img class="emailimg" src="./email.png" alt=""></div>
+  		
   			</div>
-  			<div class="iconebi">
+  			<div class="iconebi" style="display: flex;justify-content: space-between;">
   				<a href="https://twitter.com/?lang=en">
   					<div><img src="./twitter.png" alt=""></div>
   				</a>
@@ -1047,6 +1052,7 @@ darkModeBtn.addEventListener('click', function() {
 		document.querySelector(".homme").style.color = "white"
 		document.querySelector(".producct").style.color = "white"
 		document.querySelector(".contacct").style.color = "white"
+
 		bcolor = "black"
 		return
 	} else {
@@ -1063,6 +1069,7 @@ darkModeBtn.addEventListener('click', function() {
 		document.querySelector(".producct").style.color = "black"
 		document.querySelector(".contacct").style.color = "black"
 
+  
 		bcolor = "white"
 		return
 	}

@@ -63,23 +63,26 @@
         width: 97%;
         padding: 7px;
 
+}
+
         
-        }
+        
         
         .shop {
         margin-right: 6%;
         margin-top: 0%;
-        transition: 0.3s;
+        transition: 0.5s;
         }
         .shop:hover{
         color: #515151;
         font-size: 25px;
         cursor: pointer;
         font-family: cursive;
+        transition: 0.5s;
         }
         .essential {
         margin-right: 6%;
-        transition: 0.3s;
+        transition: 0.5s;
         }
         .essential:hover{
         color: #515151;
@@ -92,7 +95,7 @@
         .about {
         margin-left: 3%;
         width: 13%;
-        transition: 0.3s;
+        transition: 0.5s;
         }
         .about:hover{
         color: #515151;
@@ -104,7 +107,7 @@
         .seller {
         margin-left: 6%;
         width: 17%;
-        transition: 0.3s;
+        transition: 0.5s;
         }
         .seller:hover{
         color: #515151;
@@ -115,6 +118,7 @@
         .iconebi {
         margin-left: 6%;
         display: flex;
+        justify-content: space-evenly;
         }
         
         .MAcc {
@@ -215,7 +219,7 @@
         color:
         #707070;
         margin-bottom: 10%;
-        
+        font-size: 22px;
         
         
         }
@@ -230,8 +234,10 @@
         width: 25%;
         margin-bottom: 10%;
         font-size: 23px;
+        border-radius: 1px;
         
         }
+        #learn:hover {opacity: 0.6}
         
         .textdiv {
         
@@ -249,7 +255,7 @@
         .photo {
         height: 95%;
         width: 100%;
-        margin-top: 5%;
+
         }
         
         .product {
@@ -637,10 +643,11 @@
         border-right-style:none ;
         border-top-style:none ;
         border-color: #e7e2e2;
-        
+ 
         }
         #name:focus{
-        background-color: #e0e0e0;
+        background-color: #d7d7d7;
+        border-radius: 11px;
         
         }
         .inpt{display: flex;
@@ -697,9 +704,9 @@
         color: red;
         }
         .iconebi{
-        display: flex;
-        justify-content: space-around;
-        width: 40%;
+    
+        width: 30%;
+        margin: 0;
         }
         .lastdiv{
         display: flex;
@@ -712,48 +719,110 @@
         .long{
         font-family: sans-serif;
         }
-        .homme:hover{
-        text-decoration: underline ;
-        color: #4A4B4D;
-        cursor: pointer;
+        .homme::after{
+                content: "";
+                height: 2px;
+                width: 0%;
+                background-color: #83868a;
+                display: block;
+                transition: .5s ease-in-out;
         }
-        .colect:hover{
-        text-decoration: underline ;
-        color: #4A4B4D;
-        cursor: pointer;
+        .homme:hover::after{
+                content: "";
+                height: 2px;
+                width: 70%;
+                background-color: #a7a7ab;
+                display: block;
         }
+        .colect::after{
+                content: "";
+                height: 2px;
+                width: 0%;
+                background-color: #83868a;
+                display: block;
+                transition: .5s ease-in-out;
+        }
+        .colect:hover::after{
+                content: "";
+                height: 2px;
+                width: 100%;
+                background-color: #a7a7ab;
+                display: block;
+        }
+ 
         .colect{
         margin-top: 10%;
         margin-bottom: 10%;
         }
+        .producct::after{
+                content: "";
+                height: 2px;
+                width: 0%;
+                background-color: #83868a;
+                display: block;
+                transition: .5s ease-in-out;
+        }
+        .producct:hover::after{
+                content: "";
+                height: 2px;
+                width: 90%;
+                background-color: #a7a7ab;
+                display: block;
+        }
         
-        .producct:hover{
-        text-decoration: underline ;
-        color: #4A4B4D;
-        cursor: pointer;
-        }
-        .aboutt:hover{
-        text-decoration: underline ;
-        color: #4A4B4D;
-        cursor: pointer;
-        }
         .aboutt{
         margin-top: -2%;
         }
-        .Contacct:hover{
-        text-decoration: underline ;
-        color: #4A4B4D;
-        cursor: pointer;
+        .aboutt::after{
+                content: "";
+                height: 2px;
+                width: 0%;
+                background-color: #83868a;
+                display: block;
+                transition: .5s ease-in-out;
+        }
+        .aboutt:hover::after{
+                content: "";
+                height: 2px;
+                width: 80%;
+                background-color: #a7a7ab;
+                display: block;
+        }
+     
+        .Contacct::after{
+                content: "";
+                height: 2px;
+                width: 0%;
+                background-color: #83868a;
+                display: block;
+                transition: .5s ease-in-out;
+        }
+        .Contacct:hover::after{
+                content: "";
+                height: 2px;
+                width: 100%;
+                background-color: #a7a7ab;
+                display: block;
         }
         .Contacct{
         margin-top: 10%;
         margin-bottom: 10%;
         }
         
-        .faqss:hover{
-        text-decoration: underline ;
-        color: #4A4B4D;
-        cursor: pointer;
+        .faqss::after{
+                content: "";
+                height: 2px;
+                width: 0%;
+                background-color: #83868a;
+                display: block;
+                transition: .5s ease-in-out;
+        }
+        .faqss:hover::after{
+                content: "";
+                height: 2px;
+                width: 60%;
+                background-color: #a7a7ab;
+                display: block;
         }
         *, *::after, *::before {
         -webkit-box-sizing: border-box;
@@ -1370,3 +1439,9 @@
       .sticky + .content {
         padding-top: 102px;
       }
+      .emalimg{
+        position: absolute;
+        top: 45%;
+        left: 93%;
+    }
+ 
